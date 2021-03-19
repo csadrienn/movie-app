@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { Swipeable } from "react-touch";
 
 const transition = "transform 0.7s ease";
 
@@ -56,12 +57,17 @@ const Carousel = ({ columns, index, children }) => {
       >
         <FiChevronLeft className="icon" />
       </button>
-      <div
-        className="slider"
-        style={{ transform: `translateX(${translate}%)`, transition: sliderTransition }}
+      <Swipeable
+        onSwipeRight={() => handleCaretClick("prev")}
+        onSwipeLeft={() => handleCaretClick("next")}
       >
-        {children}
-      </div>
+        <div
+          className="slider"
+          style={{ transform: `translateX(${translate}%)`, transition: sliderTransition }}
+        >
+          {children}
+        </div>
+      </Swipeable>
       <button
         type="button"
         className="next-btn caret-btn"
