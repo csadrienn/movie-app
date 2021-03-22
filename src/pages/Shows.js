@@ -20,14 +20,20 @@ const Shows = () => {
     resetShows,
     page,
     totalPages,
+    isStarting,
   } = useDiscoverContext();
 
   useEffect(() => {
-    fetchShows(pageType, { ratings: "", released: "", runtime: "", genres: [] }, "popularity.desc");
     return () => {
       resetShows();
     };
   }, [location]);
+
+  useEffect(() => {
+    if (isStarting) {
+      fetchShows(pageType);
+    }
+  }, [isStarting]);
 
   const isMore = totalPages !== -1 && totalPages !== page;
   const fetchPages = () => {

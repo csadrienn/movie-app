@@ -3,16 +3,16 @@
 :root,
 ::after,
 ::before {
-  --clr-primary: rgb(233, 43, 182);
-  --clr-primary-dark: rgb(209, 0, 153);
-  --clr-primary-dark2: rgb(121, 12, 92);
-  --clr-primary-light: rgb(233, 177, 218);
-  --clr-primary-trans: rgba(209, 0, 153, 0.3);
+  --clr-primary: #e92bb6;
+  --clr-primary-dark: #d10099;
+  --clr-primary-dark2: #790c5c;
+  --clr-primary-light: #e9b1da;
+  --clr-primary-trans: rgba(209, 0, 153, 0.302);
   --clr-primary-trans2: rgba(209, 0, 153, 0.45);
 
-  --clr-secondary: rgb(27, 29, 31);
-  --clr-secondary-dark: rgb(18, 20, 21);
-  --clr-secondary-medium: rgb(73, 79, 83);
+  --clr-secondary: #1b1d1f;
+  --clr-secondary-dark: #121415;
+  --clr-secondary-medium: #494f53;
   --clr-secondary-trans: rgba(73, 79, 83, 0.2);
 
   --clr-bcg: #2a2b2c;
@@ -20,7 +20,7 @@
 
   --clr-font: #535353;
   --clr-font-medium: #b3b3b3;
-  --clr-font-light: rgb(236, 236, 236);
+  --clr-font-light: #ececec;
   --clr-font-dark: #222222;
 
   --border-radius: 5px;

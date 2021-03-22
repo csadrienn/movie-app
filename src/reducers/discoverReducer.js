@@ -8,7 +8,6 @@ import {
   SET_GENRE_ERROR,
   SET_FILTERS,
   CLEAR_FILTERS,
-  SET_TYPE,
 } from "../actions";
 
 export const discoverReducer = (state, action) => {
@@ -42,22 +41,21 @@ export const discoverReducer = (state, action) => {
         type: pageType,
         isLoading: false,
         isStarting: false,
-        allPages: data.total_pages,
         page,
-        isMoreShows: data.total_pages > page,
+        totalPages: data.total_pages,
       };
 
     case SET_SORTING:
-      return { ...state, sorting: action.payload, page: 1, isMoreShows: false };
+      return { ...state, sorting: action.payload, page: 1, totalPages: -1 };
 
     case RESET_SHOWS:
       return {
         ...state,
         type: "",
         sorting: "popularity.desc",
-        filters: { ratings: "", released: "", runtime: "", genres: [], isMoreShow: false },
+        filters: { ratings: "", released: "", runtime: "", genres: [] },
         isStarting: true,
-        isMoreShows: false,
+        totalPages: -1,
       };
 
     case GET_GENRES:
@@ -73,7 +71,7 @@ export const discoverReducer = (state, action) => {
         movieGenres: newMoviGenres,
         seriesGenres: newSeriesGenres,
         genresError: false,
-        isMoreShows: false,
+        totalPages: -1,
       };
 
     case SET_GENRE_ERROR:
@@ -83,7 +81,7 @@ export const discoverReducer = (state, action) => {
       const { key, value } = action.payload;
       const newFilters = { ...state.filters };
       newFilters[key] = value;
-      return { ...state, filters: newFilters, page: 1, isMoreShows: false };
+      return { ...state, filters: newFilters, page: 1, totalPages: -1 };
 
     case CLEAR_FILTERS:
       return { ...state, filters: { ratings: "", released: "", runtime: "", genres: [] }, page: 1 };

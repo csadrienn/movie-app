@@ -22,12 +22,11 @@ const initialState = {
   shows: null,
   type: "",
   page: 1,
-  allPages: -1,
   isStarting: true,
   movieGenres: [],
   seriesGenres: [],
   genresError: false,
-  isMoreShow: false,
+  totalPages: -1,
 };
 const DiscoverContext = createContext();
 
@@ -57,17 +56,12 @@ export const DiscoverProvider = ({ children }) => {
     }
   };
 
-  const fetchShows = async (
-    pageType,
-    filters = state.filters,
-    sorting = state.sorting,
-    page = 1
-  ) => {
+  const fetchShows = async (pageType, page = 1) => {
     dispatch({ type: SET_LOADING });
     try {
       const type = pageType === "series" ? "tv" : pageType;
 
-      const { ratings, released, runtime, genres } = filters;
+      const { ratings, released, runtime, genres } = state.filters;
       let filtersString = "";
 
       //check the filter properties, if not empty add to the string
@@ -103,7 +97,7 @@ export const DiscoverProvider = ({ children }) => {
         filtersString += `&with_genres=${genres.join(",")}`;
       }
 
-      const data = await axios.get(getDiscoverShowsUrl(type, sorting, filtersString, page));
+      const data = await axios.get(getDiscoverShowsUrl(type, state.sorting, filtersString, page));
 
       dispatch({ type: GET_SHOWS, payload: { data: data.data, pageType, page } });
     } catch (err) {
